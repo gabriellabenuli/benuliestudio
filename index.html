@@ -1083,7 +1083,7 @@ body {
             <div class="sec-label">Formas de pagamento</div>
             <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;" id="propPgtoGrid">
               <div class="prop-pgto-card sel" onclick="PROP.selPgto(this)"><div style="font-size:12px;font-weight:500;margin-bottom:2px;">À vista</div><div style="font-size:11px;color:var(--color-text-tertiary);line-height:1.4;">Pagamento único</div><div style="display:inline-block;font-size:9px;padding:1px 6px;border-radius:8px;background:#EAF3DE;color:#3B6D11;font-weight:500;margin-top:4px;">5% desconto</div></div>
-              <div class="prop-pgto-card" onclick="PROP.selPgto(this)"><div style="font-size:12px;font-weight:500;margin-bottom:2px;">Entrada + 2×</div><div style="font-size:11px;color:var(--color-text-tertiary);line-height:1.4;">40% entrada + 30% + 30%</div></div>
+              <div class="prop-pgto-card" onclick="PROP.selPgto(this)"><div style="font-size:12px;font-weight:500;margin-bottom:2px;"><span style="color:#999;">—</span></div><div style="font-size:11px;color:var(--color-text-tertiary);line-height:1.4;"><span style="color:#999;">—</span></div></div>
               <div class="prop-pgto-card" onclick="PROP.selPgto(this)"><div style="font-size:12px;font-weight:500;margin-bottom:2px;">Cartão de crédito</div><div style="font-size:11px;color:var(--color-text-tertiary);line-height:1.4;">Consulte condições</div></div>
             </div>
           </div>
@@ -2543,7 +2543,7 @@ const CFG = (() => {
           <div style="display:flex;flex-direction:column;gap:0;">
             ${[
               ['Pix à vista (com desconto)','Sempre incluída'],
-              ['Entrada + 2× no Pix','40% + 30% + 30%'],
+              ['<span style="color:#999;">—</span> no Pix','40% + 30% + 30%'],
               ['Cartão de crédito 1× a 6×','Taxa embutida no valor'],
             ].map(([t,d]) => `
               <div class="cfg-toggle-row">
@@ -4903,8 +4903,6 @@ const FIN = (() => {
 
   const transacoes = [
     // Recebimentos
-    { id:4, tipo:'recebimento', data:'2025-05-15', cliente:'', desc:'Entrada (50%) - <span style="color:#999;">—</span>', valor:2100, status:'Pago', metodo:'Transferência', categoria:'Projeto' },
-    { id:8, tipo:'areceber', data:'2025-06-08', cliente:'', desc:'Entrega (50%) - <span style="color:#999;">—</span>', valor:2100, status:'Pendente', metodo:'Transferência', categoria:'Projeto', vencimento:'2025-06-08' },
     { id:10, tipo:'despesa', data:'2025-06-02', fornecedor:'Adobe Creative Cloud', desc:'Assinatura - junho', valor:-79.90, status:'Pago', metodo:'Cartão', categoria:'Assinatura' },
     { id:11, tipo:'despesa', data:'2025-05-31', fornecedor:'Hospedagem Web', desc:'Renovação anual - estudiobenuli.com', valor:-299.00, status:'Pago', metodo:'Cartão', categoria:'Hospedagem' },
     { id:12, tipo:'despesa', data:'2025-05-28', fornecedor:'WeTransfer', desc:'Plano Pro - 5 usuários', valor:-49.95, status:'Pago', metodo:'Cartão', categoria:'Ferramentas' },
