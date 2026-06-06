@@ -700,7 +700,7 @@ body {
             <div class="sec-label">Projetos ativos</div>
             <div class="project-row">
               <div style="flex:1;min-width:0;">
-                <div style="font-size:11px;color:var(--color-text-tertiary);">Conceituação · prazo 10 jun</div>
+                <div style="font-size:11px;color:var(--color-text-tertiary);"></div>
                 <div class="progress-bar"><div class="progress-fill" style="width:60%;"></div></div>
               </div>
               <span class="badge b-blue">Em andamento</span>
@@ -721,7 +721,7 @@ body {
             </div>
             <div class="project-row">
               <div style="flex:1;min-width:0;">
-                <div class="proj-name">Studio Vega — Apresentação</div>
+                <div class="proj-name"></div>
                 <div style="font-size:11px;color:var(--color-text-tertiary);">Ajustes · prazo 8 jun</div>
                 <div class="progress-bar"><div class="progress-fill" style="width:45%;"></div></div>
               </div>
@@ -788,7 +788,7 @@ body {
             </div>
             <div class="project-row" style="gap:8px;font-size:12px;">
               <div style="width:14px;height:14px;border-radius:3px;border:0.5px solid var(--color-border-secondary);flex-shrink:0;cursor:pointer;"></div>
-              <div style="flex:1;">Revisar ajustes — Studio Vega</div><span class="badge b-amber" style="font-size:9px;">amanhã</span>
+              <div style="flex:1;">Revisar ajustes — </div><span class="badge b-amber" style="font-size:9px;">amanhã</span>
             </div>
             <div class="project-row" style="gap:8px;font-size:12px;">
               <div style="width:14px;height:14px;border-radius:3px;border:0.5px solid var(--color-border-secondary);flex-shrink:0;cursor:pointer;"></div>
@@ -888,7 +888,7 @@ body {
 
         <div class="card" style="border-left:3px solid #E24B4A;border-radius:0 var(--border-radius-lg) var(--border-radius-lg) 0;">
           <div class="sec-label">Alertas da semana</div>
-          <div class="hist-item"><i class="ti ti-file-x" style="font-size:14px;color:#EF9F27;flex-shrink:0;margin-top:1px;"></i><div><span style="font-weight:500;">Studio Vega</span> — contrato ainda não foi assinado. Enviado há 6 dias.</div></div>
+          <div class="hist-item"><i class="ti ti-file-x" style="font-size:14px;color:#EF9F27;flex-shrink:0;margin-top:1px;"></i><div><span style="font-weight:500;"></span> — contrato ainda não foi assinado. Enviado há 6 dias.</div></div>
         </div>
       </div>
     </div>
@@ -1332,7 +1332,7 @@ body {
               <label style="display:block;font-size:12px;font-weight:500;margin-bottom:4px;color:var(--color-text-secondary);">Cliente</label>
               <select id="finEntradaCliente" style="width:100%;padding:8px;border:1px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);font-size:13px;">
                 <option value="">Selecionar cliente</option>
-                <option value="Studio Vega">Studio Vega</option>
+                <option value=""></option>
               </select>
             </div>
             <div style="margin-bottom:15px;">
@@ -4904,8 +4904,8 @@ const FIN = (() => {
 
   const transacoes = [
     // Recebimentos
-    { id:4, tipo:'recebimento', data:'2025-05-15', cliente:'Studio Vega', desc:'Entrada (50%) - Identidade Visual', valor:2100, status:'Pago', metodo:'Transferência', categoria:'Projeto' },
-    { id:8, tipo:'areceber', data:'2025-06-08', cliente:'Studio Vega', desc:'Entrega (50%) - Identidade Visual', valor:2100, status:'Pendente', metodo:'Transferência', categoria:'Projeto', vencimento:'2025-06-08' },
+    { id:4, tipo:'recebimento', data:'2025-05-15', cliente:'', desc:'Entrada (50%) - Identidade Visual', valor:2100, status:'Pago', metodo:'Transferência', categoria:'Projeto' },
+    { id:8, tipo:'areceber', data:'2025-06-08', cliente:'', desc:'Entrega (50%) - Identidade Visual', valor:2100, status:'Pendente', metodo:'Transferência', categoria:'Projeto', vencimento:'2025-06-08' },
     { id:10, tipo:'despesa', data:'2025-06-02', fornecedor:'Adobe Creative Cloud', desc:'Assinatura - junho', valor:-79.90, status:'Pago', metodo:'Cartão', categoria:'Assinatura' },
     { id:11, tipo:'despesa', data:'2025-05-31', fornecedor:'Hospedagem Web', desc:'Renovação anual - estudiobenuli.com', valor:-299.00, status:'Pago', metodo:'Cartão', categoria:'Hospedagem' },
     { id:12, tipo:'despesa', data:'2025-05-28', fornecedor:'WeTransfer', desc:'Plano Pro - 5 usuários', valor:-49.95, status:'Pago', metodo:'Cartão', categoria:'Ferramentas' },
@@ -6813,7 +6813,7 @@ const CONTADOR = (() => {
     // Se não tiver clientes, adiciona dados de teste
     if (!temClientes) {
       const clientesTeste = [
-        { id: '4', nome: 'Studio Vega' },
+        { id: '4', nome: '' },
       ];
 
       clientesTeste.forEach((cliente, idx) => {
