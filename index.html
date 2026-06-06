@@ -4277,7 +4277,7 @@ const CRM = (() => {
         <td style="font-size:12px;font-weight:500;">${fmtValor(l.valor)}</td>
         <td class="followup ${fupClass(l.followup)}">${l.followup?(fupClass(l.followup)==='urgente'?'⚠ ':'')+fmtDate(l.followup):'—'}</td>
         <td style="color:var(--color-text-secondary);font-size:11px;max-width:160px;">${l.proxAcao}</td>
-        <td><button class="action-btn" onclick="event.stopPropagation();CRM.openDrawer(${l.id})" style="font-size:10px;padding:3px 8px;">Ver</button></td>
+        <td style="display:flex;gap:4px;"><button class="action-btn" onclick="event.stopPropagation();CRM.openDrawer(${l.id})" style="font-size:10px;padding:3px 8px;">Ver</button><button class="action-btn" onclick="event.stopPropagation();CRM.arquivarLead(${l.id})" style="font-size:10px;padding:3px 8px;background:#ff9800;color:white;" title="Arquivar">📦</button><button class="action-btn" onclick="event.stopPropagation();CRM.deletarLead(${l.id})" style="font-size:10px;padding:3px 8px;background:#f44336;color:white;" title="Deletar">🗑</button></td>
       </tr>`).join('') || '<tr><td colspan="8" style="text-align:center;padding:2rem;color:var(--color-text-tertiary);font-size:13px;">Nenhum lead encontrado.</td></tr>';
   }
 
@@ -4333,7 +4333,29 @@ const CRM = (() => {
     PREC.abrirParaProposta(lead);
   }
 
-  return { init, filterStatus, renderTable, openDrawer, closeDrawer, openNewModal, novaPropostaDoLead, get initialized(){ return initialized; } };
+  function arquivarLead(id) {
+    const lead = leads.find(x => x.id === id);
+    if (!lead) return;
+    if (confirm("Arquivar lead de " + lead.nome + "?")) {
+      lead.arquivado = true;
+      localStorage.setItem("crm_leads", JSON.stringify(leads));
+      renderTable();
+      closeDrawer();
+    }
+  }
+
+  function deletarLead(id) {
+    const lead = leads.find(x => x.id === id);
+    if (!lead) return;
+    if (confirm("Deletar lead de " + lead.nome + "? Esta ação não pode ser desfeita.")) {
+      leads = leads.filter(x => x.id !== id);
+      localStorage.setItem("crm_leads", JSON.stringify(leads));
+      renderTable();
+      closeDrawer();
+    }
+  }
+
+  return { init, filterStatus, renderTable, openDrawer, closeDrawer, openNewModal, novaPropostaDoLead, arquivarLead, deletarLead, get initialized(){ return initialized; } };
 })();
 
 /* ============================================================
