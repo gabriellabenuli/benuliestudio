@@ -4348,7 +4348,7 @@ const CRM = (() => {
     const lead = leads.find(x => x.id === id);
     if (!lead) return;
     if (confirm("Deletar lead de " + lead.nome + "? Esta ação não pode ser desfeita.")) {
-      leads = leads.filter(x => x.id !== id);
+      const idx = leads.findIndex(x => x.id === id); if (idx >= 0) leads.splice(idx, 1);
       localStorage.setItem("crm_leads", JSON.stringify(leads));
       renderTable();
       closeDrawer();
