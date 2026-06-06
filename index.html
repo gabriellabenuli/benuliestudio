@@ -1178,7 +1178,7 @@ body {
       <div id="projListView" style="display:flex;flex-direction:column;flex:1;overflow:hidden;">
         <div class="topbar">
           <div><div class="topbar-title">Projetos</div><div class="topbar-sub">Todos os projetos do estúdio</div></div>
-          <button class="new-btn"><i class="ti ti-plus" style="font-size:13px;"></i> Novo projeto</button>
+          <button class="new-btn" onclick="PROJ.openNewModal()"><i class="ti ti-plus" style="font-size:13px;"></i> Novo projeto</button>
         </div>
         <div class="list-content">
           <div class="filters">
@@ -4354,7 +4354,18 @@ const CRM = (() => {
   }
 
   function closeDrawer() { document.getElementById('crmDrawerOverlay').classList.remove('open'); }
-  function openNewModal() { alert('Modal de novo lead — disponível na próxima versão.'); }
+  function openNewModal() {
+    const nome = prompt("Nome do cliente:");
+    if (!nome) return;
+    const email = prompt("Email (opcional):");
+    const telefone = prompt("Telefone (opcional):");
+    const origem = prompt("Origem (ex: Instagram, Indicação, Site):") || "Direto";
+    const novoLead = {id: Date.now(), nome: nome.trim(), email: email?.trim() || "", telefone: telefone?.trim() || "", status: "Novo lead", servico: "", origem: origem.trim(), valor: "", proximaAcao: "", ultimoContato: new Date().toLocaleDateString("pt-BR"), criado: new Date().toLocaleDateString("pt-BR")};
+    leads.push(novoLead);
+    localStorage.setItem("crm_leads", JSON.stringify(leads));
+    init();
+    NOTIF.adicionar("Sucesso", `Lead "${nome}" adicionado!`, "sucesso", "ti-check-circle");
+  }
 
   function novaPropostaDoLead(id) {
     const lead = leads.find(x => x.id === id);
