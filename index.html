@@ -4218,14 +4218,9 @@ const CRM = (() => {
   let initialized = false;
   let currentStatus = 'todos';
 
-  let leads = JSON.parse(localStorage.getItem("crm_leads") || "[]");
-  // Se estiver vazio, carregar dados de exemplo
-  if (leads.length === 0) {
-    leads = [
-      { id:10, nome:"Marcos Viana",    contato:"(21) 97788-9900", email:"marcos@email.com",  status:"Proposta enviada",   servico:"Logotipo",           origem:"Instagram", valor:1100, followup:"2025-06-06", proxAcao:"Aguardar retorno até sexta",                historico:["01 jun — Proposta enviada","29 mai — Conversa inicial"] },
-    ];
-    localStorage.setItem("crm_leads", JSON.stringify(leads));
-  }
+  const leads = [
+    { id:10, nome:'Marcos Viana',    contato:'(21) 97788-9900', email:'marcos@email.com',  status:'Proposta enviada',   servico:'Logotipo',           origem:'Instagram', valor:1100, followup:'2025-06-06', proxAcao:'Aguardar retorno até sexta',                historico:['01 jun — Proposta enviada','29 mai — Conversa inicial'] },
+  ];
 
   const statusClass = { 'Novo lead':'s-novo','Em conversa':'s-conversa','Proposta enviada':'s-proposta','Aguardando retorno':'s-aguardando','Fechado':'s-fechado','Perdido':'s-perdido' };
   const origemIcon  = { 'Instagram':'ti-brand-instagram','Indicação':'ti-user-check','Site':'ti-world','LinkedIn':'ti-brand-linkedin' };
@@ -4338,25 +4333,30 @@ const CRM = (() => {
     PREC.abrirParaProposta(lead);
   }
 
-  function arquivarLead(id) {
+  async function arquivarLead(id) {
     const lead = leads.find(x => x.id === id);
     if (!lead) return;
     if (confirm("Arquivar lead de " + lead.nome + "?")) {
-      lead.arquivado = true;
-      localStorage.setItem("crm_leads", JSON.stringify(leads));
-      renderTable();
-      closeDrawer();
+      try {
+        await API.updateLead(id, { arquivado: true });
+        lead.arquivado = true;
+        renderTable();
+        closeDrawer();
+      } catch(e) { alert("Erro ao arquivar: " + e.message); }
     }
   }
 
-  function deletarLead(id) {
+  async function deletarLead(id) {
     const lead = leads.find(x => x.id === id);
     if (!lead) return;
     if (confirm("Deletar lead de " + lead.nome + "? Esta ação não pode ser desfeita.")) {
-      const idx = leads.findIndex(x => x.id === id); if (idx >= 0) leads.splice(idx, 1);
-      localStorage.setItem("crm_leads", JSON.stringify(leads));
-      renderTable();
-      closeDrawer();
+      try {
+        await API.deleteLead(id);
+        const idx = leads.findIndex(x => x.id === id);
+        if (idx >= 0) leads.splice(idx, 1);
+        renderTable();
+        closeDrawer();
+      } catch(e) { alert("Erro ao deletar: " + e.message); }
     }
   }
 
