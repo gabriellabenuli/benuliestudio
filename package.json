@@ -1,8 +1,0 @@
-{
-  "name": "benuli-studio",
-  "version": "1.0.0",
-  "description": "Sistema de gestão para estúdios de design",
-  "dependencies": {
-    "pg": "^8.11.3"
-  }
-}
